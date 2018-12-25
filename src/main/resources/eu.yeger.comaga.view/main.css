@@ -1,0 +1,26 @@
+.button {
+    -fx-font-size: 20;
+    -fx-alignment: center;
+    -fx-focus-traversable: false;
+}
+
+#plus-minus-button {
+    -fx-pref-width: 50;
+    -fx-pref-height: 50;
+    -fx-background-radius: 25;
+}
+
+#confirm-button {
+    -fx-pref-width: 100;
+    -fx-pref-height: 50;
+    -fx-background-radius: 15;
+}
+
+.label {
+    -fx-font-size: 20;
+    -fx-alignment: center;
+}
+
+#title-label {
+    -fx-font-size: 40;
+}
