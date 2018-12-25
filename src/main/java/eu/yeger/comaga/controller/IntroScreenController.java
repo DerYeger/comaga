@@ -1,0 +1,4 @@
+package eu.yeger.comaga.controller;
+
+public class IntroScreenController {
+}
