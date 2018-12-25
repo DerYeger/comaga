@@ -24,6 +24,8 @@ public class GenModel {
 
         field.buildAttribute("occupied", ClassModelBuilder.BOOLEAN);
         field.buildAttribute("color", ClassModelBuilder.STRING);
+        field.buildAttribute("xPos", ClassModelBuilder.INT);
+        field.buildAttribute("yPos", ClassModelBuilder.INT);
 
 
         //associations
