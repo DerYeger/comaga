@@ -4,7 +4,7 @@ import java.beans.PropertyChangeSupport;
 
 import java.beans.PropertyChangeListener;
 
-public class Field 
+public class Field  
 {
 
    public static final String PROPERTY_occupied = "occupied";
@@ -228,6 +228,48 @@ public Field withoutNeighbors(Object... value)
       this.withoutNeighbors(this.getNeighbors().clone());
 
 
+   }
+
+
+   public static final String PROPERTY_xPos = "xPos";
+
+   private int xPos;
+
+   public int getXPos()
+   {
+      return xPos;
+   }
+
+   public Field setXPos(int value)
+   {
+      if (value != this.xPos)
+      {
+         int oldValue = this.xPos;
+         this.xPos = value;
+         firePropertyChange("xPos", oldValue, value);
+      }
+      return this;
+   }
+
+
+   public static final String PROPERTY_yPos = "yPos";
+
+   private int yPos;
+
+   public int getYPos()
+   {
+      return yPos;
+   }
+
+   public Field setYPos(int value)
+   {
+      if (value != this.yPos)
+      {
+         int oldValue = this.yPos;
+         this.yPos = value;
+         firePropertyChange("yPos", oldValue, value);
+      }
+      return this;
    }
 
 

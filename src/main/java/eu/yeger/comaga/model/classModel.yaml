@@ -23,12 +23,12 @@
   roles: 	game9 	fields10 	
 
 - field4: 	Clazz
-  attributes: 	occupied11 	color12 	
+  attributes: 	occupied11 	color12 	xPos13 	yPos14 	
   model: 	c1
   modified: 	false
   name: 	Field
   propertyStyle: 	POJO
-  roles: 	grid13 	neighbors14 	neighbors15 	
+  roles: 	grid15 	neighbors16 	neighbors17 	
 
 - score5: 	Attribute
   clazz: 	game2
@@ -77,7 +77,7 @@
   clazz: 	grid3
   modified: 	false
   name: 	fields
-  other: 	grid13
+  other: 	grid15
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
@@ -95,7 +95,21 @@
   propertyStyle: 	POJO
   type: 	String
 
-- grid13: 	AssocRole
+- xPos13: 	Attribute
+  clazz: 	field4
+  modified: 	false
+  name: 	xPos
+  propertyStyle: 	POJO
+  type: 	int
+
+- yPos14: 	Attribute
+  clazz: 	field4
+  modified: 	false
+  name: 	yPos
+  propertyStyle: 	POJO
+  type: 	int
+
+- grid15: 	AssocRole
   aggregation: 	false
   cardinality: 	1
   clazz: 	field4
@@ -105,23 +119,23 @@
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
-- neighbors14: 	AssocRole
+- neighbors16: 	AssocRole
   aggregation: 	false
   cardinality: 	42
   clazz: 	field4
   modified: 	false
   name: 	neighbors
-  other: 	neighbors15
+  other: 	neighbors17
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
-- neighbors15: 	AssocRole
+- neighbors17: 	AssocRole
   aggregation: 	false
   cardinality: 	42
   clazz: 	field4
   modified: 	false
   name: 	neighbors
-  other: 	neighbors14
+  other: 	neighbors16
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 

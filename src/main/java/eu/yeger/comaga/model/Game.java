@@ -4,7 +4,7 @@ import java.beans.PropertyChangeSupport;
 
 import java.beans.PropertyChangeListener;
 
-public class Game 
+public class Game  
 {
 
    public static final String PROPERTY_score = "score";
@@ -116,6 +116,14 @@ public class Game
       this.setGrid(null);
 
    }
+
+
+
+
+
+
+
+
 
 
 }
