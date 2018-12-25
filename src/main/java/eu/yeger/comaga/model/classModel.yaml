@@ -1,0 +1,127 @@
+- c1: 	ClassModel
+  classes: 	game2 	grid3 	field4 	
+  defaultPropertyStyle: 	POJO
+  defaultRoleType: 	"java.util.ArrayList<%s>"
+  mainJavaDir: 	"src/main/java"
+  packageName: 	eu.yeger.comaga.model
+  packageSrcFolder: 	"src/main/java/eu/yeger/comaga/model"
+
+- game2: 	Clazz
+  attributes: 	score5 	
+  model: 	c1
+  modified: 	false
+  name: 	Game
+  propertyStyle: 	POJO
+  roles: 	grid6 	
+
+- grid3: 	Clazz
+  attributes: 	width7 	height8 	
+  model: 	c1
+  modified: 	false
+  name: 	Grid
+  propertyStyle: 	POJO
+  roles: 	game9 	fields10 	
+
+- field4: 	Clazz
+  attributes: 	occupied11 	color12 	
+  model: 	c1
+  modified: 	false
+  name: 	Field
+  propertyStyle: 	POJO
+  roles: 	grid13 	neighbors14 	neighbors15 	
+
+- score5: 	Attribute
+  clazz: 	game2
+  modified: 	false
+  name: 	score
+  propertyStyle: 	POJO
+  type: 	int
+
+- grid6: 	AssocRole
+  aggregation: 	false
+  cardinality: 	1
+  clazz: 	game2
+  modified: 	false
+  name: 	grid
+  other: 	game9
+  propertyStyle: 	POJO
+  roleType: 	"java.util.ArrayList<%s>"
+
+- width7: 	Attribute
+  clazz: 	grid3
+  modified: 	false
+  name: 	width
+  propertyStyle: 	POJO
+  type: 	int
+
+- height8: 	Attribute
+  clazz: 	grid3
+  modified: 	false
+  name: 	height
+  propertyStyle: 	POJO
+  type: 	int
+
+- game9: 	AssocRole
+  aggregation: 	false
+  cardinality: 	1
+  clazz: 	grid3
+  modified: 	false
+  name: 	game
+  other: 	grid6
+  propertyStyle: 	POJO
+  roleType: 	"java.util.ArrayList<%s>"
+
+- fields10: 	AssocRole
+  aggregation: 	false
+  cardinality: 	42
+  clazz: 	grid3
+  modified: 	false
+  name: 	fields
+  other: 	grid13
+  propertyStyle: 	POJO
+  roleType: 	"java.util.ArrayList<%s>"
+
+- occupied11: 	Attribute
+  clazz: 	field4
+  modified: 	false
+  name: 	occupied
+  propertyStyle: 	POJO
+  type: 	boolean
+
+- color12: 	Attribute
+  clazz: 	field4
+  modified: 	false
+  name: 	color
+  propertyStyle: 	POJO
+  type: 	String
+
+- grid13: 	AssocRole
+  aggregation: 	false
+  cardinality: 	1
+  clazz: 	field4
+  modified: 	false
+  name: 	grid
+  other: 	fields10
+  propertyStyle: 	POJO
+  roleType: 	"java.util.ArrayList<%s>"
+
+- neighbors14: 	AssocRole
+  aggregation: 	false
+  cardinality: 	42
+  clazz: 	field4
+  modified: 	false
+  name: 	neighbors
+  other: 	neighbors15
+  propertyStyle: 	POJO
+  roleType: 	"java.util.ArrayList<%s>"
+
+- neighbors15: 	AssocRole
+  aggregation: 	false
+  cardinality: 	42
+  clazz: 	field4
+  modified: 	false
+  name: 	neighbors
+  other: 	neighbors14
+  propertyStyle: 	POJO
+  roleType: 	"java.util.ArrayList<%s>"
+
