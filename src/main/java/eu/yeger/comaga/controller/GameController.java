@@ -9,11 +9,9 @@ import java.util.Random;
 
 public class GameController {
 
-    private static final String DEFAULT_COLOR = "";
+    private static final String DEFAULT_COLOR = "#333333";
 
     private static final String[] COLORS = {"Green", "Red", "Blue", "Orange", "Yellow"};
-
-    private GridController gridController;
 
     public void initGame(final int width, final int height) {
         Game game = Model.getInstance().getGame();

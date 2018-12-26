@@ -148,7 +148,7 @@ public class Grid
          {
             if (this.fields.contains(item))
             {
-               this.fields.remove((Field)item);
+               this.fields.remove(item);
                ((Field)item).setGrid(null);
                firePropertyChange("fields", item, null);
             }

@@ -147,7 +147,7 @@ public Field withoutNeighbors(Object... value)
          {
             if (this.neighbors.contains(item))
             {
-               this.neighbors.remove((Field)item);
+               this.neighbors.remove(item);
                ((Field)item).withoutNeighbors(this);
                firePropertyChange("neighbors", item, null);
             }

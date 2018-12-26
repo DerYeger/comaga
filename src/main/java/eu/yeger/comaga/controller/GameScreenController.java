@@ -1,18 +1,17 @@
 package eu.yeger.comaga.controller;
 
+import eu.yeger.comaga.model.Field;
 import eu.yeger.comaga.model.Game;
 import eu.yeger.comaga.model.Grid;
 import eu.yeger.comaga.model.Model;
 
+import eu.yeger.comaga.view.ViewBuilder;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-
-import java.io.IOException;
 
 public class GameScreenController {
 
@@ -35,15 +34,9 @@ public class GameScreenController {
         //adds field elements to the game's grid
         for (int x = 0; x < grid.getWidth(); x++) {
             for (int y = 0; y < grid.getHeight(); y++) {
-                try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("field.fxml"));
-                    StackPane stackPane = fxmlLoader.load();
-                    FieldController fieldController = fxmlLoader.getController();
-                    fieldController.setField(grid.getFields().get(x + grid.getWidth() * y));
-                    gridPane.add(stackPane, x, y);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                Field field = grid.getFields().get(x + grid.getWidth() * y);
+                StackPane stackPane = ViewBuilder.buildFieldView(field);
+                gridPane.add(stackPane, field.getXPos(), grid.getHeight() - field.getYPos() - 1);
             }
         }
 
@@ -51,8 +44,7 @@ public class GameScreenController {
     }
 
     private void addListeners() {
-        Game game = Model.getInstance().getGame();
-        game.addPropertyChangeListener(Game.PROPERTY_score, evt -> updateScoreLabel());
+        Model.getInstance().getGame().addPropertyChangeListener(Game.PROPERTY_score, evt -> updateScoreLabel());
     }
 
     private void updateScoreLabel() {
