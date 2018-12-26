@@ -23,12 +23,12 @@
   roles: 	game9 	fields10 	
 
 - field4: 	Clazz
-  attributes: 	occupied11 	color12 	xPos13 	yPos14 	
+  attributes: 	occupied11 	selected12 	highlighted13 	color14 	xPos15 	yPos16 	
   model: 	c1
   modified: 	false
   name: 	Field
   propertyStyle: 	POJO
-  roles: 	grid15 	neighbors16 	neighbors17 	
+  roles: 	grid17 	neighbors18 	neighbors19 	
 
 - score5: 	Attribute
   clazz: 	game2
@@ -77,39 +77,56 @@
   clazz: 	grid3
   modified: 	false
   name: 	fields
-  other: 	grid15
+  other: 	grid17
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
 - occupied11: 	Attribute
   clazz: 	field4
+  initialization: 	false
   modified: 	false
   name: 	occupied
   propertyStyle: 	POJO
   type: 	boolean
 
-- color12: 	Attribute
+- selected12: 	Attribute
+  clazz: 	field4
+  initialization: 	false
+  modified: 	false
+  name: 	selected
+  propertyStyle: 	POJO
+  type: 	boolean
+
+- highlighted13: 	Attribute
+  clazz: 	field4
+  initialization: 	false
+  modified: 	false
+  name: 	highlighted
+  propertyStyle: 	POJO
+  type: 	boolean
+
+- color14: 	Attribute
   clazz: 	field4
   modified: 	false
   name: 	color
   propertyStyle: 	POJO
   type: 	String
 
-- xPos13: 	Attribute
+- xPos15: 	Attribute
   clazz: 	field4
   modified: 	false
   name: 	xPos
   propertyStyle: 	POJO
   type: 	int
 
-- yPos14: 	Attribute
+- yPos16: 	Attribute
   clazz: 	field4
   modified: 	false
   name: 	yPos
   propertyStyle: 	POJO
   type: 	int
 
-- grid15: 	AssocRole
+- grid17: 	AssocRole
   aggregation: 	false
   cardinality: 	1
   clazz: 	field4
@@ -119,23 +136,23 @@
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
-- neighbors16: 	AssocRole
+- neighbors18: 	AssocRole
   aggregation: 	false
   cardinality: 	42
   clazz: 	field4
   modified: 	false
   name: 	neighbors
-  other: 	neighbors17
+  other: 	neighbors19
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
-- neighbors17: 	AssocRole
+- neighbors19: 	AssocRole
   aggregation: 	false
   cardinality: 	42
   clazz: 	field4
   modified: 	false
   name: 	neighbors
-  other: 	neighbors16
+  other: 	neighbors18
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+
+<StackPane xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.yeger.comaga.controller.FieldController">
+   <children>
+      <Rectangle fx:id="selectionRectangle" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="60.0" stroke="YELLOW" strokeType="INSIDE" strokeWidth="3.0" visible="false" width="60.0" />
+      <Rectangle fx:id="highlightRectangle" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="60.0" layoutX="10.0" layoutY="10.0" stroke="#00ff04" strokeType="INSIDE" strokeWidth="3.0" visible="false" width="60.0" />
+      <Circle fx:id="colorCircle" fill="#333333" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+   </children>
+</StackPane>

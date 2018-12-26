@@ -17,13 +17,15 @@ public class GenModel {
 
 
         //attributes
-        game.buildAttribute("score", ClassModelBuilder.INT);
+        game.buildAttribute("score", ClassModelBuilder.INT, "0");
 
-        grid.buildAttribute("width", ClassModelBuilder.INT);
-        grid.buildAttribute("height", ClassModelBuilder.INT);
+        grid.buildAttribute("width", ClassModelBuilder.INT, "8");
+        grid.buildAttribute("height", ClassModelBuilder.INT, "20");
 
-        field.buildAttribute("occupied", ClassModelBuilder.BOOLEAN);
-        field.buildAttribute("color", ClassModelBuilder.STRING);
+        field.buildAttribute("occupied", ClassModelBuilder.BOOLEAN, "false");
+        field.buildAttribute("selected", ClassModelBuilder.BOOLEAN, "false");
+        field.buildAttribute("highlighted", ClassModelBuilder.BOOLEAN, "false");
+        field.buildAttribute("color", ClassModelBuilder.STRING, "#333333");
         field.buildAttribute("xPos", ClassModelBuilder.INT);
         field.buildAttribute("yPos", ClassModelBuilder.INT);
 

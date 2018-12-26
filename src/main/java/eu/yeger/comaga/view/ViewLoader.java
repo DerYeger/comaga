@@ -1,4 +1,5 @@
 package eu.yeger.comaga.view;
 
-public class ScreenBuilder {
+public class ViewLoader {
+
 }

@@ -9,7 +9,7 @@ public class Field
 
    public static final String PROPERTY_occupied = "occupied";
 
-   private boolean occupied;
+   private boolean occupied = false;
 
    public boolean getOccupied()
    {
@@ -268,6 +268,48 @@ public Field withoutNeighbors(Object... value)
          int oldValue = this.yPos;
          this.yPos = value;
          firePropertyChange("yPos", oldValue, value);
+      }
+      return this;
+   }
+
+
+   public static final String PROPERTY_selected = "selected";
+
+   private boolean selected = false;
+
+   public boolean getSelected()
+   {
+      return selected;
+   }
+
+   public Field setSelected(boolean value)
+   {
+      if (value != this.selected)
+      {
+         boolean oldValue = this.selected;
+         this.selected = value;
+         firePropertyChange("selected", oldValue, value);
+      }
+      return this;
+   }
+
+
+   public static final String PROPERTY_highlighted = "highlighted";
+
+   private boolean highlighted = false;
+
+   public boolean getHighlighted()
+   {
+      return highlighted;
+   }
+
+   public Field setHighlighted(boolean value)
+   {
+      if (value != this.highlighted)
+      {
+         boolean oldValue = this.highlighted;
+         this.highlighted = value;
+         firePropertyChange("highlighted", oldValue, value);
       }
       return this;
    }
