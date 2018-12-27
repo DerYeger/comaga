@@ -9,9 +9,12 @@ import java.util.Random;
 
 public class GameController {
 
-    private static final String DEFAULT_COLOR = "#333333";
+    private static final String DEFAULT_COLOR = "#444444";
 
-    private static final String[] COLORS = {"Green", "Red", "Blue", "Orange", "Yellow"};
+    //blue, green, yellow, orange, red
+    private static final String[] COLORS = {"#0000ff", "#008000", "#ffff00", "#ffa500", "#ff0000"};
+
+    private Random random;
 
     public void initGame(final int width, final int height) {
         Game game = Model.getInstance().getGame();
@@ -22,6 +25,8 @@ public class GameController {
                 .setWidth(width)
                 .setHeight(height);
 
+        random = new Random(System.currentTimeMillis());
+
         generateFields();
 
         generateStartSetup();
@@ -31,7 +36,7 @@ public class GameController {
         Grid grid = Model.getInstance().getGame().getGrid();
         for (int y = 0; y < grid.getHeight(); y++) {
             for (int x = 0; x < grid.getWidth(); x++) {
-                new Field().setColor("PLACEHOLDER")
+                new Field().setColor(DEFAULT_COLOR)
                         .setGrid(grid)
                         .setXPos(x)
                         .setYPos(y);
@@ -42,29 +47,20 @@ public class GameController {
     private void generateStartSetup() {
         Grid grid = Model.getInstance().getGame().getGrid();
 
-        int halfHeight = grid.getHeight() / 2;
+        int halfHeight = (grid.getHeight() + 1)/ 2;
 
         //fills bottom half of grid with random colors
         for (int x = 0; x < grid.getWidth(); x++) {
-            for (int y = 0; y < halfHeight - 1; y++) {
+            for (int y = 0; y < halfHeight; y++) {
                 Field field = grid.getFields().get(x + y * grid.getWidth());
                 field.setOccupied(true)
                         .setColor(getRandomColor());
             }
         }
-
-        Random random = new Random(System.currentTimeMillis());
-        for (int x = 0; x < grid.getWidth(); x++) {
-            if (random.nextBoolean()) {
-                Field field = grid.getFields().get(x + (halfHeight - 1) * grid.getWidth());
-                field.setOccupied(true).setColor(getRandomColor());
-            }
-        }
     }
 
     private String getRandomColor() {
-        Random random = new Random(System.currentTimeMillis());
-        return COLORS[random.nextInt(COLORS.length - 1)];
+        return COLORS[random.nextInt(COLORS.length)];
     }
 
 }
