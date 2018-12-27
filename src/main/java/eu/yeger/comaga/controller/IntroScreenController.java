@@ -10,11 +10,11 @@ import javafx.stage.Stage;
 
 public class IntroScreenController {
 
-    private static final int DEFAULT_WIDTH = 5;
-    private static final int MINIMUM_WIDTH = 3;
+    private static final int DEFAULT_WIDTH = 7;
+    private static final int MINIMUM_WIDTH = 4;
     private static final int MAXIMUM_WIDTH = 10;
 
-    private static final int DEFAULT_HEIGHT = 10;
+    private static final int DEFAULT_HEIGHT = 9;
     private static final int MINIMUM_HEIGHT = 6;
     private static final int MAXIMUM_HEIGHT = 12;
 
@@ -45,11 +45,14 @@ public class IntroScreenController {
 
     private Stage stage;
 
-    public void initialize(Stage stage) {
+    public void initialize(final Stage stage) {
         this.stage = stage;
 
         width = DEFAULT_WIDTH;
         height = DEFAULT_HEIGHT;
+
+        widthLabel.setText(Integer.toString(width));
+        heightLabel.setText(Integer.toString(height));
 
         addHandlers();
     }
@@ -87,8 +90,7 @@ public class IntroScreenController {
     }
 
     private void switchToGameScreen() {
-        GameController gc = new GameController();
-        gc.initGame(width, height);
+        GameController.getGameControllerInstance().initGame(width, height);
         VBox vBox = ViewBuilder.buildGameScreen();
         Scene scene = new Scene(vBox);
         stage.setScene(scene);
