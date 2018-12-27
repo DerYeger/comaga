@@ -72,7 +72,7 @@ public class IntroScreenController {
         decreaseHeightButton.setOnAction(event -> {
             height--;
             decreaseHeightButton.setDisable(height <= MINIMUM_HEIGHT);
-            increaseWidthButton.setDisable(false);
+            increaseHeightButton.setDisable(false);
             heightLabel.setText(Integer.toString(height));
         });
 
