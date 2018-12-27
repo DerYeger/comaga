@@ -37,7 +37,9 @@ public class FieldController {
     }
 
     private void updateColor() {
-        colorCircle.setFill(Paint.valueOf(field.getColor()));
+        //TODO Fix original implementation
+        //colorCircle.setFill(Paint.valueOf(field.getColor()));
+        colorCircle.setStyle("-fx-fill: " + field.getColor());
     }
 
     private void updateSelectedIndicator() {
