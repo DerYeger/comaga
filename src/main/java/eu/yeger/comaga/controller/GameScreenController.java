@@ -31,14 +31,11 @@ public class GameScreenController {
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
 
-        //adds field elements to the game's grid
-        for (int x = 0; x < grid.getWidth(); x++) {
-            for (int y = 0; y < grid.getHeight(); y++) {
-                Field field = grid.getFields().get(x + grid.getWidth() * y);
-                StackPane stackPane = ViewBuilder.buildFieldView(field);
-                gridPane.add(stackPane, field.getXPos(), grid.getHeight() - field.getYPos() - 1);
-            }
-        }
+        //adds field elements to the game's grid view
+        grid.getFields().stream().forEach(field -> {
+            StackPane stackPane = ViewBuilder.buildFieldView(field);
+            gridPane.add(stackPane, field.getXPos(), grid.getHeight() - field.getYPos() - 1);
+        });
 
         vBox.getChildren().add(gridPane);
     }
