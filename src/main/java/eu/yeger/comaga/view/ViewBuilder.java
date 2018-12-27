@@ -32,8 +32,6 @@ public class ViewBuilder {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(ViewBuilder.class.getResource("gameScreen.fxml"));
             vBox = fxmlLoader.load();
-            GameScreenController gameScreenController = fxmlLoader.getController();
-            gameScreenController.initialize();
         } catch (IOException e) {
             e.printStackTrace();
         }
