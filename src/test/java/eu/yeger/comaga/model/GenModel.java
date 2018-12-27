@@ -23,15 +23,15 @@ public class GenModel {
         grid.buildAttribute("height", ClassModelBuilder.INT, "20");
 
         field.buildAttribute("occupied", ClassModelBuilder.BOOLEAN, "false");
-        field.buildAttribute("selected", ClassModelBuilder.BOOLEAN, "false");
         field.buildAttribute("highlighted", ClassModelBuilder.BOOLEAN, "false");
-        field.buildAttribute("color", ClassModelBuilder.STRING, "#333333");
+        field.buildAttribute("color", ClassModelBuilder.STRING, "\"#333333\"");
         field.buildAttribute("xPos", ClassModelBuilder.INT);
         field.buildAttribute("yPos", ClassModelBuilder.INT);
 
 
         //associations
         game.buildAssociation(grid, "grid", ClassModelBuilder.ONE, "game", ClassModelBuilder.ONE);
+        game.buildAssociation(field, "selectedField", ClassModelBuilder.ONE, "selectedBy", ClassModelBuilder.ONE);
 
         grid.buildAssociation(field, "fields", ClassModelBuilder.MANY, "grid", ClassModelBuilder.ONE);
 

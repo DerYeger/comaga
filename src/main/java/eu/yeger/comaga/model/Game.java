@@ -9,7 +9,7 @@ public class Game
 
    public static final String PROPERTY_score = "score";
 
-   private int score;
+   private int score = 0;
 
    public int getScore()
    {
@@ -114,8 +114,63 @@ public class Game
    public void removeYou()
    {
       this.setGrid(null);
+      this.setSelectedField(null);
 
    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   public static final String PROPERTY_selectedField = "selectedField";
+
+   private Field selectedField = null;
+
+   public Field getSelectedField()
+   {
+      return this.selectedField;
+   }
+
+   public Game setSelectedField(Field value)
+   {
+      if (this.selectedField != value)
+      {
+         Field oldValue = this.selectedField;
+         if (this.selectedField != null)
+         {
+            this.selectedField = null;
+            oldValue.setSelectedBy(null);
+         }
+         this.selectedField = value;
+         if (value != null)
+         {
+            value.setSelectedBy(this);
+         }
+         firePropertyChange("selectedField", oldValue, value);
+      }
+      return this;
+   }
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -30,7 +30,7 @@ public class Field
 
    public static final String PROPERTY_color = "color";
 
-   private String color;
+   private String color = "#333333";
 
    public String getColor()
    {
@@ -147,7 +147,7 @@ public Field withoutNeighbors(Object... value)
          {
             if (this.neighbors.contains(item))
             {
-               this.neighbors.remove(item);
+               this.neighbors.remove((Field)item);
                ((Field)item).withoutNeighbors(this);
                firePropertyChange("neighbors", item, null);
             }
@@ -207,19 +207,9 @@ public Field withoutNeighbors(Object... value)
       return true;
    }
 
-   @Override
-   public String toString()
-   {
-      StringBuilder result = new StringBuilder();
-
-      result.append(" ").append(this.getColor());
-
-
-      return result.substring(1);
-   }
-
    public void removeYou()
    {
+      this.setSelectedBy(null);
       this.setGrid(null);
 
       this.withoutNeighbors(this.getNeighbors().clone());
@@ -273,27 +263,6 @@ public Field withoutNeighbors(Object... value)
    }
 
 
-   public static final String PROPERTY_selected = "selected";
-
-   private boolean selected = false;
-
-   public boolean getSelected()
-   {
-      return selected;
-   }
-
-   public Field setSelected(boolean value)
-   {
-      if (value != this.selected)
-      {
-         boolean oldValue = this.selected;
-         this.selected = value;
-         firePropertyChange("selected", oldValue, value);
-      }
-      return this;
-   }
-
-
    public static final String PROPERTY_highlighted = "highlighted";
 
    private boolean highlighted = false;
@@ -313,6 +282,49 @@ public Field withoutNeighbors(Object... value)
       }
       return this;
    }
+
+
+public static final String PROPERTY_selectedBy = "selectedBy";
+
+private Game selectedBy = null;
+
+public Game getSelectedBy()
+   {
+      return this.selectedBy;
+   }
+
+public Field setSelectedBy(Game value)
+   {
+      if (this.selectedBy != value)
+      {
+         Game oldValue = this.selectedBy;
+         if (this.selectedBy != null)
+         {
+            this.selectedBy = null;
+            oldValue.setSelectedField(null);
+         }
+         this.selectedBy = value;
+         if (value != null)
+         {
+            value.setSelectedField(this);
+         }
+         firePropertyChange("selectedBy", oldValue, value);
+      }
+      return this;
+   }
+
+
+   @Override
+   public String toString()
+   {
+      StringBuilder result = new StringBuilder();
+
+      result.append(" ").append(this.getColor());
+
+
+      return result.substring(1);
+   }
+
 
 
 }

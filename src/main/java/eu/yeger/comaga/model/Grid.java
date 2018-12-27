@@ -9,7 +9,7 @@ public class Grid
 
    public static final String PROPERTY_width = "width";
 
-   private int width;
+   private int width = 8;
 
    public int getWidth()
    {
@@ -30,7 +30,7 @@ public class Grid
 
    public static final String PROPERTY_height = "height";
 
-   private int height;
+   private int height = 20;
 
    public int getHeight()
    {
@@ -148,7 +148,7 @@ public class Grid
          {
             if (this.fields.contains(item))
             {
-               this.fields.remove(item);
+               this.fields.remove((Field)item);
                ((Field)item).setGrid(null);
                firePropertyChange("fields", item, null);
             }
@@ -218,6 +218,30 @@ public class Grid
 
 
    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
