@@ -18,4 +18,8 @@ public class Model {
     public Game getGame() {
         return game;
     }
+
+    public static void reset() {
+        model = null;
+    }
 }

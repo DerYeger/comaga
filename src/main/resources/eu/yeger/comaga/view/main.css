@@ -17,6 +17,12 @@
     -fx-background-radius: 15;
 }
 
+#confirm-button-large {
+    -fx-pref-width: 180;
+    -fx-pref-height: 60;
+    -fx-background-radius: 15;
+}
+
 .label {
     -fx-font-size: 30;
     -fx-text-fill: #cccccc;

@@ -3,22 +3,34 @@ package eu.yeger.comaga.controller;
 import eu.yeger.comaga.model.Field;
 import eu.yeger.comaga.model.Game;
 import eu.yeger.comaga.model.Model;
+import eu.yeger.comaga.view.ViewBuilder;
+import javafx.stage.Stage;
 
 public class GameController {
 
-    public void initGame(final int width, final int height) {
+    private Stage stage;
+
+    public void initGame(Stage stage, final int width, final int height) {
+        this.stage = stage;
+
+        Model.getInstance().reset();
+
         Game game = Model.getInstance().getGame();
 
         game.setWidth(width).setHeight(height)
                 .addPropertyChangeListener(Game.PROPERTY_turnCount, evt -> {
                     if (game.getTurnCount() % ControllerUtilities.TURN_DURATION == ControllerUtilities.TURN_DURATION - 1) {
-                        cycle();
+                        executeTurnCycle();
                     }
                 });
 
         generateFields();
         setNeighbors();
         generateStartSetup();
+
+        removeAndScore();
+
+        game.setScore(0);
     }
 
     private void generateFields() {
@@ -61,35 +73,51 @@ public class GameController {
         }
     }
 
-    private void cycle() {
-        //TODO end game if lift up would push fields out of bounds
+    private void executeTurnCycle() {
+        if (isGameOver()) {
+            stage.setScene(ViewBuilder.buildGameOverScreenScene(stage));
+        }
         liftUp();
         spawnNewRowAtBottom();
+        removeAndScore();
     }
 
     public void turn() {
+        Model.getInstance().getGame().setTurnCount((Model.getInstance().getGame().getTurnCount() + 1) % ControllerUtilities.TURN_DURATION);
+        removeAndScore();
+    }
+
+    private void removeAndScore() {
+        boolean removed = true;
+        while (removed) {
+            removed = removeFieldsAndScore();
+            pushDown();
+        }
+    }
+
+    private boolean isGameOver() {
+        removeAndScore();
         Game game = Model.getInstance().getGame();
-        game.setTurnCount(game.getTurnCount() + 1);
-        //TODO implement field marking, marked field removal and call pushDown()
-        markFieldsForRemoval();
-        removeMarkedFieldsAndScore();
-        pushDown();
+        return game.getFields().stream().anyMatch(field -> field.getOccupied() && field.getYPos() == game.getHeight() - 1);
     }
 
     //pushes all bubbles as far down as possible
-    private void pushDown() {
+    private boolean pushDown() {
+        boolean pushed = false;
         Game game = Model.getInstance().getGame();
         for (int i = 0; i < game.getHeight() - 1; i++) {
             for (Field field : game.getFields()) {
                 if (field.getOccupied()) continue;
                 final int xPos = field.getXPos();
                 final int yPos = field.getYPos();
+                pushed = game.getFields().stream().anyMatch(f -> f.getXPos() == xPos && f.getYPos() > yPos && f.getOccupied());
                 game.getFields().stream().filter(f -> f.getXPos() == xPos && f.getYPos() > yPos && f.getOccupied()).limit(1).forEach(f -> {
                     field.setOccupied(true).setColor(f.getColor());
                     f.setOccupied(false).setColor(ControllerUtilities.DEFAULT_COLOR);
                 });
             }
         }
+        return pushed;
     }
 
     //lifts all bubbles up by one row
@@ -169,7 +197,8 @@ public class GameController {
         }
     }
 
-    private void removeMarkedFieldsAndScore() {
+    private boolean removeFieldsAndScore() {
+        markFieldsForRemoval();
         Game game = Model.getInstance().getGame();
         int score = (int) Math.pow(game.getFields().stream().filter(Field::getMarked).count(), 2) * ControllerUtilities.SCORE_MULTIPLIER;
         game.setScore(game.getScore() + score);
@@ -178,6 +207,7 @@ public class GameController {
             field.setColor(ControllerUtilities.DEFAULT_COLOR);
             field.setMarked(false);
         });
+        return score > 0;
     }
 
 }

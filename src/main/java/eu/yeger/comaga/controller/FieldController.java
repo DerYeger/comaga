@@ -41,7 +41,7 @@ public class FieldController {
 
     private void updateSelectedIndicator() {
         selectionRectangle.setVisible(field.getSelectedBy() != null);
-        highlightNeighbors(field.getSelectedBy() != null);
+        unhighlightNeighbors();
     }
 
     private void updateHighlightIndicator() {
@@ -63,12 +63,12 @@ public class FieldController {
                     //no field or different field selected
                     //new field is not highlighted
                     game.setSelectedField(field);
-                    highlightNeighbors(true);
+                    highlightNeighbors();
                 } else if (game.getSelectedField().equals(field)){
                     //same field previously selected
                     //unselect field
                     game.setSelectedField(null);
-                    highlightNeighbors(false);
+                    unhighlightNeighbors();
                 } else {
                     //user clicked on highlighted field, initiate swap
                     Field otherField = game.getSelectedField();
@@ -86,7 +86,11 @@ public class FieldController {
     }
 
     //TODO Decide if swapping two fields with same color should be allowed
-    private void highlightNeighbors(final boolean highlight) {
-        field.getNeighbors().stream().filter(Field::getOccupied).forEach(f -> f.setHighlighted(highlight));
+    private void highlightNeighbors() {
+        field.getNeighbors().stream().filter(f -> f.getOccupied() && !f.getColor().equals(field.getColor())).forEach(f -> f.setHighlighted(true));
+    }
+
+    private void unhighlightNeighbors() {
+        field.getNeighbors().stream().forEach(f -> f.setHighlighted(false));
     }
 }

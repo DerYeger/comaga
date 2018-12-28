@@ -3,10 +3,8 @@ package eu.yeger.comaga.controller;
 import eu.yeger.comaga.view.ViewBuilder;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class IntroScreenController {
@@ -91,9 +89,7 @@ public class IntroScreenController {
     }
 
     private void switchToGameScreen() {
-        new GameController().initGame(width, height);
-        VBox vBox = ViewBuilder.buildGameScreen();
-        Scene scene = new Scene(vBox);
-        stage.setScene(scene);
+        new GameController().initGame(stage, width, height);
+        stage.setScene(ViewBuilder.buildGameScreenScene());
     }
 }

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="600.0" prefWidth="800.0" spacing="40.0" style="-fx-background-color: #333333;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.yeger.comaga.controller.IntroScreenController">
+<VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="800.0" spacing="40.0" style="-fx-background-color: #333333;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.yeger.comaga.controller.IntroScreenController">
    <children>
       <Label id="title-label" text="Color Matching Game">
          <font>
@@ -51,6 +51,6 @@
       <Button id="confirm-button" fx:id="startButton" mnemonicParsing="false" text="Start" />
    </children>
    <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      <Insets bottom="20.0" left="20.0" right="20.0" top="50.0" />
    </padding>
 </VBox>
