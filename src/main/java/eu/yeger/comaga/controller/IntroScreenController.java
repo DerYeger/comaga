@@ -91,7 +91,7 @@ public class IntroScreenController {
     }
 
     private void switchToGameScreen() {
-        GameController.getGameControllerInstance().initGame(width, height);
+        new GameController().initGame(width, height);
         VBox vBox = ViewBuilder.buildGameScreen();
         Scene scene = new Scene(vBox);
         stage.setScene(scene);

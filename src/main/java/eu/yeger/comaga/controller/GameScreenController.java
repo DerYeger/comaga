@@ -2,8 +2,8 @@ package eu.yeger.comaga.controller;
 
 import eu.yeger.comaga.model.Game;
 import eu.yeger.comaga.model.Model;
-
 import eu.yeger.comaga.view.ViewBuilder;
+
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
