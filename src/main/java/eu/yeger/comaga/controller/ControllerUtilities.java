@@ -4,6 +4,8 @@ import java.util.Random;
 
 class ControllerUtilities {
 
+    static final int SCORE_MULTIPLIER = 10;
+
     static final int TURN_DURATION = 3;
 
     //dark grey
