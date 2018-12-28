@@ -7,24 +7,23 @@
   packageSrcFolder: 	"src/main/java/eu/yeger/comaga/model"
 
 - game2: 	Clazz
-  attributes: 	score4 	width5 	height6 	
+  attributes: 	score4 	width5 	height6 	turnCount7 	
   model: 	c1
   modified: 	false
   name: 	Game
   propertyStyle: 	POJO
-  roles: 	fields7 	selectedField8 	
+  roles: 	fields8 	selectedField9 	
 
 - field3: 	Clazz
-  attributes: 	occupied9 	highlighted10 	color11 	xPos12 	yPos13 	
+  attributes: 	color10 	xPos11 	yPos12 	occupied13 	highlighted14 	marked15 	
   model: 	c1
   modified: 	false
   name: 	Field
   propertyStyle: 	POJO
-  roles: 	game14 	selectedBy15 	neighbors16 	neighbors17 	
+  roles: 	game16 	selectedBy17 	neighbors18 	neighbors19 	
 
 - score4: 	Attribute
   clazz: 	game2
-  initialization: 	0
   modified: 	false
   name: 	score
   propertyStyle: 	POJO
@@ -44,101 +43,113 @@
   propertyStyle: 	POJO
   type: 	int
 
-- fields7: 	AssocRole
+- turnCount7: 	Attribute
+  clazz: 	game2
+  initialization: 	"-1"
+  modified: 	false
+  name: 	turnCount
+  propertyStyle: 	POJO
+  type: 	int
+
+- fields8: 	AssocRole
   aggregation: 	false
   cardinality: 	42
   clazz: 	game2
   modified: 	false
   name: 	fields
-  other: 	game14
+  other: 	game16
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
-- selectedField8: 	AssocRole
+- selectedField9: 	AssocRole
   aggregation: 	false
   cardinality: 	1
   clazz: 	game2
   modified: 	false
   name: 	selectedField
-  other: 	selectedBy15
+  other: 	selectedBy17
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
-- occupied9: 	Attribute
+- color10: 	Attribute
   clazz: 	field3
-  initialization: 	false
-  modified: 	false
-  name: 	occupied
-  propertyStyle: 	POJO
-  type: 	boolean
-
-- highlighted10: 	Attribute
-  clazz: 	field3
-  initialization: 	false
-  modified: 	false
-  name: 	highlighted
-  propertyStyle: 	POJO
-  type: 	boolean
-
-- color11: 	Attribute
-  clazz: 	field3
-  initialization: 	"\"#333333\""
   modified: 	false
   name: 	color
   propertyStyle: 	POJO
   type: 	String
 
-- xPos12: 	Attribute
+- xPos11: 	Attribute
   clazz: 	field3
   modified: 	false
   name: 	xPos
   propertyStyle: 	POJO
   type: 	int
 
-- yPos13: 	Attribute
+- yPos12: 	Attribute
   clazz: 	field3
   modified: 	false
   name: 	yPos
   propertyStyle: 	POJO
   type: 	int
 
-- game14: 	AssocRole
+- occupied13: 	Attribute
+  clazz: 	field3
+  modified: 	false
+  name: 	occupied
+  propertyStyle: 	POJO
+  type: 	boolean
+
+- highlighted14: 	Attribute
+  clazz: 	field3
+  modified: 	false
+  name: 	highlighted
+  propertyStyle: 	POJO
+  type: 	boolean
+
+- marked15: 	Attribute
+  clazz: 	field3
+  modified: 	false
+  name: 	marked
+  propertyStyle: 	POJO
+  type: 	boolean
+
+- game16: 	AssocRole
   aggregation: 	false
   cardinality: 	1
   clazz: 	field3
   modified: 	false
   name: 	game
-  other: 	fields7
+  other: 	fields8
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
-- selectedBy15: 	AssocRole
+- selectedBy17: 	AssocRole
   aggregation: 	false
   cardinality: 	1
   clazz: 	field3
   modified: 	false
   name: 	selectedBy
-  other: 	selectedField8
+  other: 	selectedField9
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
-- neighbors16: 	AssocRole
+- neighbors18: 	AssocRole
   aggregation: 	false
   cardinality: 	42
   clazz: 	field3
   modified: 	false
   name: 	neighbors
-  other: 	neighbors17
+  other: 	neighbors19
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
-- neighbors17: 	AssocRole
+- neighbors19: 	AssocRole
   aggregation: 	false
   cardinality: 	42
   clazz: 	field3
   modified: 	false
   name: 	neighbors
-  other: 	neighbors16
+  other: 	neighbors18
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 

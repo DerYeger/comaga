@@ -19,15 +19,17 @@ public class GenModel {
 
 
         //attributes
-        game.buildAttribute("score", ClassModelBuilder.INT, "0");
+        game.buildAttribute("score", ClassModelBuilder.INT);
         game.buildAttribute("width", ClassModelBuilder.INT);
         game.buildAttribute("height", ClassModelBuilder.INT);
+        game.buildAttribute("turnCount", ClassModelBuilder.INT, "-1");
 
-        field.buildAttribute("occupied", ClassModelBuilder.BOOLEAN, "false");
-        field.buildAttribute("highlighted", ClassModelBuilder.BOOLEAN, "false");
-        field.buildAttribute("color", ClassModelBuilder.STRING, "\"#333333\"");
+        field.buildAttribute("color", ClassModelBuilder.STRING);
         field.buildAttribute("xPos", ClassModelBuilder.INT);
         field.buildAttribute("yPos", ClassModelBuilder.INT);
+        field.buildAttribute("occupied", ClassModelBuilder.BOOLEAN);
+        field.buildAttribute("highlighted", ClassModelBuilder.BOOLEAN);
+        field.buildAttribute("marked", ClassModelBuilder.BOOLEAN);
 
 
         //associations

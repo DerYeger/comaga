@@ -9,7 +9,7 @@ public class Field
 
    public static final String PROPERTY_occupied = "occupied";
 
-   private boolean occupied = false;
+   private boolean occupied;
 
    public boolean getOccupied()
    {
@@ -30,7 +30,7 @@ public class Field
 
    public static final String PROPERTY_color = "color";
 
-   private String color = "#333333";
+   private String color;
 
    public String getColor()
    {
@@ -235,7 +235,7 @@ public Field withoutNeighbors(Object... value)
 
    public static final String PROPERTY_highlighted = "highlighted";
 
-   private boolean highlighted = false;
+   private boolean highlighted;
 
    public boolean getHighlighted()
    {
@@ -326,6 +326,27 @@ public Field setSelectedBy(Game value)
       return this;
    }
 
+
+
+   public static final String PROPERTY_marked = "marked";
+
+   private boolean marked;
+
+   public boolean getMarked()
+   {
+      return marked;
+   }
+
+   public Field setMarked(boolean value)
+   {
+      if (value != this.marked)
+      {
+         boolean oldValue = this.marked;
+         this.marked = value;
+         firePropertyChange("marked", oldValue, value);
+      }
+      return this;
+   }
 
 
 }

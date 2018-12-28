@@ -9,7 +9,7 @@ public class Game
 
    public static final String PROPERTY_score = "score";
 
-   private int score = 0;
+   private int score;
 
    public int getScore()
    {
@@ -277,6 +277,33 @@ public class Game
       }
       return this;
    }
+
+
+
+
+   public static final String PROPERTY_turnCount = "turnCount";
+
+   private int turnCount = -1;
+
+   public int getTurnCount()
+   {
+      return turnCount;
+   }
+
+   public Game setTurnCount(int value)
+   {
+      if (value != this.turnCount)
+      {
+         int oldValue = this.turnCount;
+         this.turnCount = value;
+         firePropertyChange("turnCount", oldValue, value);
+      }
+      return this;
+   }
+
+
+
+
 
 
 
