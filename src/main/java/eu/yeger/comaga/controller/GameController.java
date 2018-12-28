@@ -71,8 +71,10 @@ public class GameController {
         Game game = Model.getInstance().getGame();
         game.setTurnCount(game.getTurnCount() + 1);
         //TODO implement field marking, marked field removal and call pushDown()
+        markFieldsForRemoval();
+        removeMarkedFieldsAndScore();
+        pushDown();
     }
-
 
     //pushes all bubbles as far down as possible
     private void pushDown() {
@@ -115,8 +117,67 @@ public class GameController {
     //returns the field with given coordinates or null if coordinates are out of bounds
     private Field getFieldByCoordinates(final int xPos, final int yPos) {
         Game game = Model.getInstance().getGame();
+        if (xPos >= game.getWidth() || yPos >= game.getHeight() || xPos < 0 || yPos < 0) return null;
         int index = xPos + game.getWidth() * yPos;
-        if (index >= game.getFields().size() || index < 0) return null;
         return game.getFields().get(index);
     }
+
+    //mark all fields that are part of a chain with a minimum length of 3 for removal
+    private void markFieldsForRemoval() {
+        for (Field field : Model.getInstance().getGame().getFields()) {
+            if (!field.getOccupied() || field.getMarked()) continue;
+            int xPos = field.getXPos();
+            int yPos = field.getYPos();
+            String color = field.getColor();
+
+            //get adjacent fields
+            Field topField = getFieldByCoordinates(xPos, yPos + 1);
+            Field rightField = getFieldByCoordinates(xPos + 1, yPos);
+            Field bottomField = getFieldByCoordinates(xPos, yPos - 1);
+            Field leftField = getFieldByCoordinates(xPos - 1, yPos);
+
+            Field secondTopField = getFieldByCoordinates(xPos, yPos + 2);
+            Field secondRightField = getFieldByCoordinates(xPos + 2, yPos);
+            Field secondBottomField = getFieldByCoordinates(xPos, yPos - 2);
+            Field secondLeftField = getFieldByCoordinates(xPos - 2, yPos);
+
+            if (topField != null && bottomField != null && topField.getColor().equals(color) && bottomField.getColor().equals(color)) { //field is inner part of vertical chain
+                field.setMarked(true);
+                topField.setMarked(true);
+                bottomField.setMarked(true);
+            } else if (rightField != null && leftField != null && rightField.getColor().equals(color) && leftField.getColor().equals(color)) { //field is inner part of horizontal chain
+                field.setMarked(true);
+                rightField.setMarked(true);
+                leftField.setMarked(true);
+            } else if (bottomField != null && secondBottomField != null && bottomField.getColor().equals(color) && secondBottomField.getColor().equals(color)) { //field is top of vertical chain
+                field.setMarked(true);
+                bottomField.setMarked(true);
+                secondBottomField.setMarked(true);
+            } else if (topField != null && secondTopField != null && topField.getColor().equals(color) && secondTopField.getColor().equals(color)) { //field is bottom of vertical chain
+                field.setMarked(true);
+                topField.setMarked(true);
+                secondTopField.setMarked(true);
+            } else if (leftField != null && secondLeftField != null && leftField.getColor().equals(color) && secondLeftField.getColor().equals(color)) { //field is right end of horizontal chain
+                field.setMarked(true);
+                leftField.setMarked(true);
+                secondLeftField.setMarked(true);
+            } else if (rightField != null && secondRightField != null && rightField.getColor().equals(color) && secondRightField.getColor().equals(color)) { //field is left end of horizontal chain
+                field.setMarked(true);
+                rightField.setMarked(true);
+                secondRightField.setMarked(true);
+            }
+        }
+    }
+
+    private void removeMarkedFieldsAndScore() {
+        Game game = Model.getInstance().getGame();
+        int score = (int) Math.pow(game.getFields().stream().filter(Field::getMarked).count(), 2) * ControllerUtilities.SCORE_MULTIPLIER;
+        game.setScore(game.getScore() + score);
+        game.getFields().stream().filter(Field::getMarked).forEach(field -> {
+            field.setOccupied(false);
+            field.setColor(ControllerUtilities.DEFAULT_COLOR);
+            field.setMarked(false);
+        });
+    }
+
 }
