@@ -71,7 +71,6 @@ public class FieldController {
                     highlightNeighbors(false);
                 } else {
                     //user clicked on highlighted field, initiate swap
-                    //TODO implement swapping of fields
                     Field otherField = game.getSelectedField();
                     String otherColor = otherField.getColor();
 
@@ -80,7 +79,7 @@ public class FieldController {
 
                     game.setSelectedField(null);
 
-                    GameController.getGameControllerInstance().turn();
+                    new GameController().turn();
                 }
             }
         });
@@ -90,5 +89,4 @@ public class FieldController {
     private void highlightNeighbors(final boolean highlight) {
         field.getNeighbors().stream().filter(Field::getOccupied).forEach(f -> f.setHighlighted(highlight));
     }
-
 }
