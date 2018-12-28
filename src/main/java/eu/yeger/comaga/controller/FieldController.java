@@ -1,9 +1,9 @@
 package eu.yeger.comaga.controller;
 
 import eu.yeger.comaga.model.Field;
-
 import eu.yeger.comaga.model.Game;
 import eu.yeger.comaga.model.Model;
+
 import javafx.fxml.FXML;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;

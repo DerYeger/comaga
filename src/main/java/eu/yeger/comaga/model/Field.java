@@ -49,36 +49,6 @@ public class Field
    }
 
 
-   public static final String PROPERTY_grid = "grid";
-
-   private Grid grid = null;
-
-   public Grid getGrid()
-   {
-      return this.grid;
-   }
-
-   public Field setGrid(Grid value)
-   {
-      if (this.grid != value)
-      {
-         Grid oldValue = this.grid;
-         if (this.grid != null)
-         {
-            this.grid = null;
-            oldValue.withoutFields(this);
-         }
-         this.grid = value;
-         if (value != null)
-         {
-            value.withFields(this);
-         }
-         firePropertyChange("grid", oldValue, value);
-      }
-      return this;
-   }
-
-
 
 public static final java.util.ArrayList<Field> EMPTY_neighbors = new java.util.ArrayList<Field>()
    { @Override public boolean add(Field value){ throw new UnsupportedOperationException("No direct add! Use xy.withNeighbors(obj)"); }};
@@ -209,8 +179,8 @@ public Field withoutNeighbors(Object... value)
 
    public void removeYou()
    {
+      this.setGame(null);
       this.setSelectedBy(null);
-      this.setGrid(null);
 
       this.withoutNeighbors(this.getNeighbors().clone());
 
@@ -323,6 +293,37 @@ public Field setSelectedBy(Game value)
 
 
       return result.substring(1);
+   }
+
+
+
+   public static final String PROPERTY_game = "game";
+
+   private Game game = null;
+
+   public Game getGame()
+   {
+      return this.game;
+   }
+
+   public Field setGame(Game value)
+   {
+      if (this.game != value)
+      {
+         Game oldValue = this.game;
+         if (this.game != null)
+         {
+            this.game = null;
+            oldValue.withoutFields(this);
+         }
+         this.game = value;
+         if (value != null)
+         {
+            value.withFields(this);
+         }
+         firePropertyChange("game", oldValue, value);
+      }
+      return this;
    }
 
 

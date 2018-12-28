@@ -8,19 +8,20 @@ import org.fulib.classmodel.ClassModel;
 public class GenModel {
 
     public static void main(String[] args) {
+        //preparation
         ClassModelBuilder mb = Fulib.classModelBuilder("eu.yeger.comaga.model", "src/main/java");
+
 
         //classes
         ClassBuilder game = mb.buildClass("Game");
-        ClassBuilder grid = mb.buildClass("Grid");
+
         ClassBuilder field = mb.buildClass("Field");
 
 
         //attributes
         game.buildAttribute("score", ClassModelBuilder.INT, "0");
-
-        grid.buildAttribute("width", ClassModelBuilder.INT, "8");
-        grid.buildAttribute("height", ClassModelBuilder.INT, "20");
+        game.buildAttribute("width", ClassModelBuilder.INT);
+        game.buildAttribute("height", ClassModelBuilder.INT);
 
         field.buildAttribute("occupied", ClassModelBuilder.BOOLEAN, "false");
         field.buildAttribute("highlighted", ClassModelBuilder.BOOLEAN, "false");
@@ -30,10 +31,8 @@ public class GenModel {
 
 
         //associations
-        game.buildAssociation(grid, "grid", ClassModelBuilder.ONE, "game", ClassModelBuilder.ONE);
+        game.buildAssociation(field, "fields", ClassModelBuilder.MANY, "game", ClassModelBuilder.ONE);
         game.buildAssociation(field, "selectedField", ClassModelBuilder.ONE, "selectedBy", ClassModelBuilder.ONE);
-
-        grid.buildAssociation(field, "fields", ClassModelBuilder.MANY, "grid", ClassModelBuilder.ONE);
 
         field.buildAssociation(field, "neighbors", ClassModelBuilder.MANY, "neighbors", ClassModelBuilder.MANY);
 

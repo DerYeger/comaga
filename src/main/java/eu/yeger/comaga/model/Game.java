@@ -28,36 +28,6 @@ public class Game
    }
 
 
-   public static final String PROPERTY_grid = "grid";
-
-   private Grid grid = null;
-
-   public Grid getGrid()
-   {
-      return this.grid;
-   }
-
-   public Game setGrid(Grid value)
-   {
-      if (this.grid != value)
-      {
-         Grid oldValue = this.grid;
-         if (this.grid != null)
-         {
-            this.grid = null;
-            oldValue.setGame(null);
-         }
-         this.grid = value;
-         if (value != null)
-         {
-            value.setGame(this);
-         }
-         firePropertyChange("grid", oldValue, value);
-      }
-      return this;
-   }
-
-
 
    protected PropertyChangeSupport listeners = null;
 
@@ -113,8 +83,10 @@ public class Game
 
    public void removeYou()
    {
-      this.setGrid(null);
       this.setSelectedField(null);
+
+      this.withoutFields(this.getFields().clone());
+
 
    }
 
@@ -181,6 +153,130 @@ public class Game
 
 
 
+
+
+
+
+
+
+   public static final String PROPERTY_width = "width";
+
+   private int width;
+
+   public int getWidth()
+   {
+      return width;
+   }
+
+   public Game setWidth(int value)
+   {
+      if (value != this.width)
+      {
+         int oldValue = this.width;
+         this.width = value;
+         firePropertyChange("width", oldValue, value);
+      }
+      return this;
+   }
+
+
+   public static final String PROPERTY_height = "height";
+
+   private int height;
+
+   public int getHeight()
+   {
+      return height;
+   }
+
+   public Game setHeight(int value)
+   {
+      if (value != this.height)
+      {
+         int oldValue = this.height;
+         this.height = value;
+         firePropertyChange("height", oldValue, value);
+      }
+      return this;
+   }
+
+
+   public static final java.util.ArrayList<Field> EMPTY_fields = new java.util.ArrayList<Field>()
+   { @Override public boolean add(Field value){ throw new UnsupportedOperationException("No direct add! Use xy.withFields(obj)"); }};
+
+
+   public static final String PROPERTY_fields = "fields";
+
+   private java.util.ArrayList<Field> fields = null;
+
+   public java.util.ArrayList<Field> getFields()
+   {
+      if (this.fields == null)
+      {
+         return EMPTY_fields;
+      }
+
+      return this.fields;
+   }
+
+   public Game withFields(Object... value)
+   {
+      if(value==null) return this;
+      for (Object item : value)
+      {
+         if (item == null) continue;
+         if (item instanceof java.util.Collection)
+         {
+            for (Object i : (java.util.Collection) item)
+            {
+               this.withFields(i);
+            }
+         }
+         else if (item instanceof Field)
+         {
+            if (this.fields == null)
+            {
+               this.fields = new java.util.ArrayList<Field>();
+            }
+            if ( ! this.fields.contains(item))
+            {
+               this.fields.add((Field)item);
+               ((Field)item).setGame(this);
+               firePropertyChange("fields", null, item);
+            }
+         }
+         else throw new IllegalArgumentException();
+      }
+      return this;
+   }
+
+
+
+   public Game withoutFields(Object... value)
+   {
+      if (this.fields == null || value==null) return this;
+      for (Object item : value)
+      {
+         if (item == null) continue;
+         if (item instanceof java.util.Collection)
+         {
+            for (Object i : (java.util.Collection) item)
+            {
+               this.withoutFields(i);
+            }
+         }
+         else if (item instanceof Field)
+         {
+            if (this.fields.contains(item))
+            {
+               this.fields.remove((Field)item);
+               ((Field)item).setGame(null);
+               firePropertyChange("fields", item, null);
+            }
+         }
+      }
+      return this;
+   }
 
 
 

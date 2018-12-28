@@ -2,7 +2,6 @@ package eu.yeger.comaga.controller;
 
 import eu.yeger.comaga.model.Field;
 import eu.yeger.comaga.model.Game;
-import eu.yeger.comaga.model.Grid;
 import eu.yeger.comaga.model.Model;
 
 import java.util.Random;
@@ -34,11 +33,9 @@ public class GameController {
     public void initGame(final int width, final int height) {
         Game game = Model.getInstance().getGame();
 
-        Grid grid = new Grid();
 
-        grid.setGame(game)
-                .setWidth(width)
-                .setHeight(height);
+
+        game.setWidth(width).setHeight(height);
 
         random = new Random(System.currentTimeMillis());
 
@@ -50,11 +47,11 @@ public class GameController {
     }
 
     private void generateFields() {
-        Grid grid = Model.getInstance().getGame().getGrid();
-        for (int y = 0; y < grid.getHeight(); y++) {
-            for (int x = 0; x < grid.getWidth(); x++) {
+        Game game = Model.getInstance().getGame();
+        for (int y = 0; y < game.getHeight(); y++) {
+            for (int x = 0; x < game.getWidth(); x++) {
                 new Field().setColor(DEFAULT_COLOR)
-                        .setGrid(grid)
+                        .setGame(game)
                         .setXPos(x)
                         .setYPos(y);
             }
@@ -63,11 +60,11 @@ public class GameController {
 
     //TODO Optimize?
     private void setNeighbors() {
-        Grid grid = Model.getInstance().getGame().getGrid();
-        for (Field field : grid.getFields()) {
+        Game game = Model.getInstance().getGame();
+        for (Field field : game.getFields()) {
             int xPos = field.getXPos();
             int yPos = field.getYPos();
-            grid.getFields().stream().filter(f -> f.getXPos() == xPos && f.getYPos() == yPos + 1
+            game.getFields().stream().filter(f -> f.getXPos() == xPos && f.getYPos() == yPos + 1
                     || f.getXPos() == xPos + 1 && f.getYPos() == yPos
                     || f.getXPos() == xPos && f.getYPos() == yPos - 1
                     || f.getXPos() == xPos - 1 && f.getYPos() == yPos).forEach(f -> f.withNeighbors(field));
@@ -75,14 +72,14 @@ public class GameController {
     }
 
     private void generateStartSetup() {
-        Grid grid = Model.getInstance().getGame().getGrid();
+        Game game = Model.getInstance().getGame();
 
-        int halfHeight = (grid.getHeight() + 1)/ 2;
+        int halfHeight = (game.getHeight() + 1)/ 2;
 
         //fills bottom half of grid with random colors
-        for (int x = 0; x < grid.getWidth(); x++) {
+        for (int x = 0; x < game.getWidth(); x++) {
             for (int y = 0; y < halfHeight; y++) {
-                Field field = grid.getFields().get(x + y * grid.getWidth());
+                Field field = game.getFields().get(x + y * game.getWidth());
                 field.setOccupied(true)
                         .setColor(getRandomColor());
             }
@@ -100,13 +97,13 @@ public class GameController {
     }
 
     private void pushDown() {
-        Grid grid = Model.getInstance().getGame().getGrid();
-        for (int i = 0; i < grid.getHeight() - 1; i++) {
-            for (Field field : grid.getFields()) {
+        Game game = Model.getInstance().getGame();
+        for (int i = 0; i < game.getHeight() - 1; i++) {
+            for (Field field : game.getFields()) {
                 if (field.getOccupied()) continue;
                 final int xPos = field.getXPos();
                 final int yPos = field.getYPos();
-                grid.getFields().stream().filter(f -> f.getXPos() == xPos && f.getYPos() > yPos && f.getOccupied()).limit(1).forEach(f -> {
+                game.getFields().stream().filter(f -> f.getXPos() == xPos && f.getYPos() > yPos && f.getOccupied()).limit(1).forEach(f -> {
                     field.setOccupied(true).setColor(f.getColor());
                     f.setOccupied(false).setColor(DEFAULT_COLOR);
                 });
@@ -115,13 +112,13 @@ public class GameController {
     }
 
     private void liftUp() {
-        Grid grid = Model.getInstance().getGame().getGrid();
-        for (int i = grid.getFields().size() - 1; i >= grid.getWidth(); i--) {
-            Field field = grid.getFields().get(i);
+        Game game = Model.getInstance().getGame();
+        for (int i = game.getFields().size() - 1; i >= game.getWidth(); i--) {
+            Field field = game.getFields().get(i);
             final int xPos = field.getXPos();
             final int yPos = field.getYPos();
             //set color and occupancy of field to that of the field below it
-            grid.getFields().stream().filter(f -> f.getXPos() == xPos && f.getYPos() == yPos - 1).limit(1).forEach(f -> {
+            game.getFields().stream().filter(f -> f.getXPos() == xPos && f.getYPos() == yPos - 1).limit(1).forEach(f -> {
                 field.setOccupied(f.getOccupied()).setColor(f.getColor());
             });
         }
@@ -129,9 +126,9 @@ public class GameController {
 
     private void spawnNewRowAtBottom() {
         liftUp();
-        Grid grid = Model.getInstance().getGame().getGrid();
-        for (int i = 0; i < grid.getWidth(); i++) {
-            grid.getFields().get(i).setOccupied(true).setColor(getRandomColor());
+        Game game = Model.getInstance().getGame();
+        for (int i = 0; i < game.getWidth(); i++) {
+            game.getFields().get(i).setOccupied(true).setColor(getRandomColor());
         }
     }
 }

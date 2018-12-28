@@ -1,8 +1,6 @@
 package eu.yeger.comaga.controller;
 
-import eu.yeger.comaga.model.Field;
 import eu.yeger.comaga.model.Game;
-import eu.yeger.comaga.model.Grid;
 import eu.yeger.comaga.model.Model;
 
 import eu.yeger.comaga.view.ViewBuilder;
@@ -27,14 +25,14 @@ public class GameScreenController {
     }
 
     private void initGrid() {
-        Grid grid = Model.getInstance().getGame().getGrid();
+        Game game = Model.getInstance().getGame();
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
 
         //adds field elements to the game's grid view
-        grid.getFields().stream().forEach(field -> {
+        game.getFields().stream().forEach(field -> {
             StackPane stackPane = ViewBuilder.buildFieldView(field);
-            gridPane.add(stackPane, field.getXPos(), grid.getHeight() - field.getYPos() - 1);
+            gridPane.add(stackPane, field.getXPos(), game.getHeight() - field.getYPos() - 1);
         });
 
         vBox.getChildren().add(gridPane);

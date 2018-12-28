@@ -1,6 +1,7 @@
 package eu.yeger.comaga.controller;
 
 import eu.yeger.comaga.view.ViewBuilder;
+
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

@@ -1,5 +1,5 @@
 - c1: 	ClassModel
-  classes: 	game2 	grid3 	field4 	
+  classes: 	game2 	field3 	
   defaultPropertyStyle: 	POJO
   defaultRoleType: 	"java.util.ArrayList<%s>"
   mainJavaDir: 	"src/main/java"
@@ -7,30 +7,22 @@
   packageSrcFolder: 	"src/main/java/eu/yeger/comaga/model"
 
 - game2: 	Clazz
-  attributes: 	score5 	
+  attributes: 	score4 	width5 	height6 	
   model: 	c1
   modified: 	false
   name: 	Game
   propertyStyle: 	POJO
-  roles: 	grid6 	selectedField7 	
+  roles: 	fields7 	selectedField8 	
 
-- grid3: 	Clazz
-  attributes: 	width8 	height9 	
-  model: 	c1
-  modified: 	false
-  name: 	Grid
-  propertyStyle: 	POJO
-  roles: 	game10 	fields11 	
-
-- field4: 	Clazz
-  attributes: 	occupied12 	highlighted13 	color14 	xPos15 	yPos16 	
+- field3: 	Clazz
+  attributes: 	occupied9 	highlighted10 	color11 	xPos12 	yPos13 	
   model: 	c1
   modified: 	false
   name: 	Field
   propertyStyle: 	POJO
-  roles: 	selectedBy17 	grid18 	neighbors19 	neighbors20 	
+  roles: 	game14 	selectedBy15 	neighbors16 	neighbors17 	
 
-- score5: 	Attribute
+- score4: 	Attribute
   clazz: 	game2
   initialization: 	0
   modified: 	false
@@ -38,137 +30,115 @@
   propertyStyle: 	POJO
   type: 	int
 
-- grid6: 	AssocRole
-  aggregation: 	false
-  cardinality: 	1
+- width5: 	Attribute
   clazz: 	game2
-  modified: 	false
-  name: 	grid
-  other: 	game10
-  propertyStyle: 	POJO
-  roleType: 	"java.util.ArrayList<%s>"
-
-- selectedField7: 	AssocRole
-  aggregation: 	false
-  cardinality: 	1
-  clazz: 	game2
-  modified: 	false
-  name: 	selectedField
-  other: 	selectedBy17
-  propertyStyle: 	POJO
-  roleType: 	"java.util.ArrayList<%s>"
-
-- width8: 	Attribute
-  clazz: 	grid3
-  initialization: 	8
   modified: 	false
   name: 	width
   propertyStyle: 	POJO
   type: 	int
 
-- height9: 	Attribute
-  clazz: 	grid3
-  initialization: 	20
+- height6: 	Attribute
+  clazz: 	game2
   modified: 	false
   name: 	height
   propertyStyle: 	POJO
   type: 	int
 
-- game10: 	AssocRole
-  aggregation: 	false
-  cardinality: 	1
-  clazz: 	grid3
-  modified: 	false
-  name: 	game
-  other: 	grid6
-  propertyStyle: 	POJO
-  roleType: 	"java.util.ArrayList<%s>"
-
-- fields11: 	AssocRole
+- fields7: 	AssocRole
   aggregation: 	false
   cardinality: 	42
-  clazz: 	grid3
+  clazz: 	game2
   modified: 	false
   name: 	fields
-  other: 	grid18
+  other: 	game14
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
-- occupied12: 	Attribute
-  clazz: 	field4
+- selectedField8: 	AssocRole
+  aggregation: 	false
+  cardinality: 	1
+  clazz: 	game2
+  modified: 	false
+  name: 	selectedField
+  other: 	selectedBy15
+  propertyStyle: 	POJO
+  roleType: 	"java.util.ArrayList<%s>"
+
+- occupied9: 	Attribute
+  clazz: 	field3
   initialization: 	false
   modified: 	false
   name: 	occupied
   propertyStyle: 	POJO
   type: 	boolean
 
-- highlighted13: 	Attribute
-  clazz: 	field4
+- highlighted10: 	Attribute
+  clazz: 	field3
   initialization: 	false
   modified: 	false
   name: 	highlighted
   propertyStyle: 	POJO
   type: 	boolean
 
-- color14: 	Attribute
-  clazz: 	field4
+- color11: 	Attribute
+  clazz: 	field3
   initialization: 	"\"#333333\""
   modified: 	false
   name: 	color
   propertyStyle: 	POJO
   type: 	String
 
-- xPos15: 	Attribute
-  clazz: 	field4
+- xPos12: 	Attribute
+  clazz: 	field3
   modified: 	false
   name: 	xPos
   propertyStyle: 	POJO
   type: 	int
 
-- yPos16: 	Attribute
-  clazz: 	field4
+- yPos13: 	Attribute
+  clazz: 	field3
   modified: 	false
   name: 	yPos
   propertyStyle: 	POJO
   type: 	int
 
-- selectedBy17: 	AssocRole
+- game14: 	AssocRole
   aggregation: 	false
   cardinality: 	1
-  clazz: 	field4
+  clazz: 	field3
+  modified: 	false
+  name: 	game
+  other: 	fields7
+  propertyStyle: 	POJO
+  roleType: 	"java.util.ArrayList<%s>"
+
+- selectedBy15: 	AssocRole
+  aggregation: 	false
+  cardinality: 	1
+  clazz: 	field3
   modified: 	false
   name: 	selectedBy
-  other: 	selectedField7
+  other: 	selectedField8
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
-- grid18: 	AssocRole
-  aggregation: 	false
-  cardinality: 	1
-  clazz: 	field4
-  modified: 	false
-  name: 	grid
-  other: 	fields11
-  propertyStyle: 	POJO
-  roleType: 	"java.util.ArrayList<%s>"
-
-- neighbors19: 	AssocRole
+- neighbors16: 	AssocRole
   aggregation: 	false
   cardinality: 	42
-  clazz: 	field4
+  clazz: 	field3
   modified: 	false
   name: 	neighbors
-  other: 	neighbors20
+  other: 	neighbors17
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
-- neighbors20: 	AssocRole
+- neighbors17: 	AssocRole
   aggregation: 	false
   cardinality: 	42
-  clazz: 	field4
+  clazz: 	field3
   modified: 	false
   name: 	neighbors
-  other: 	neighbors19
+  other: 	neighbors16
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
