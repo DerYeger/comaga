@@ -45,7 +45,6 @@ public class FieldController {
     }
 
     private void updateHighlightIndicator() {
-        //highlightRectangle.setVisible(field.getHighlightedBy() != null);
         highlightRectangle.setVisible(field.getHighlighted());
     }
 
